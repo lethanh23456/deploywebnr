@@ -40,10 +40,18 @@ function Home() {
         
         <div className="download_buttons">
           <div className="download_item">
-            <div className="download_button windows">
+            <div 
+              className="download_button windows"
+              onClick={() => {
+                window.location.href = "https://drive.google.com/file/d/15jikvC1p4iYc3837NVDXB0IyxWAaDFpN/view?usp=sharing";
+              }}
+            >
               <div className="button_icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M3 5.45L9.5 4.5V11.5H3V5.45ZM3 12.5H9.5V19.5L3 18.55V12.5ZM10.5 4.25L21 2.5V11.5H10.5V4.25ZM21 12.5V21.5L10.5 19.75V12.5H21Z" fill="currentColor"/>
+                  <path 
+                    d="M3 5.45L9.5 4.5V11.5H3V5.45ZM3 12.5H9.5V19.5L3 18.55V12.5ZM10.5 4.25L21 2.5V11.5H10.5V4.25ZM21 12.5V21.5L10.5 19.75V12.5H21Z" 
+                    fill="currentColor"
+                  />
                 </svg>
               </div>
               <div className="button_content">
