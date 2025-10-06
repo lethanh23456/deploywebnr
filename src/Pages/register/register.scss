@@ -1,0 +1,338 @@
+// Variables - Anime Theme Colors (same as Login)
+$anime-orange: #ff6b35;
+$anime-red: #dc2626;
+$anime-purple: #7c3aed;
+$anime-dark: #1e1b4b;
+$anime-yellow: #fbbf24;
+$anime-pink: #ec4899;
+$anime-cyan: #06b6d4;
+$anime-green: #10b981;
+
+// Glass morphism variables
+$glass-bg: rgba(255, 255, 255, 0.08);
+$glass-border: rgba(255, 255, 255, 0.15);
+$glass-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+
+// Animation variables
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// Mixins (same as Login)
+@mixin glass-card($blur: 12px) {
+  background: $glass-bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid $glass-border;
+  box-shadow: $glass-shadow;
+}
+
+
+
+@mixin glow-effect($color, $intensity: 0.5) {
+  box-shadow: 0 0 20px rgba($color, $intensity),
+              0 0 40px rgba($color, $intensity * 0.3),
+              0 0 80px rgba($color, $intensity * 0.1);
+}
+
+
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+}
+
+.register-card {
+  @include glass-card(16px);
+  border-radius: 24px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  position: relative;
+  z-index: 1;
+  transform: translateY(0);
+  transition: $transition-bounce;
+
+  &:hover {
+    transform: translateY(-8px);
+    @include glow-effect($anime-green, 0.4);
+  }
+}
+
+.register-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .register-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, $anime-green, $anime-cyan, $anime-purple);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    animation: titleGlow 3s ease-in-out infinite alternate;
+  }
+
+  .register-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input-group {
+  position: relative;
+
+  .input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    pointer-events: none;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      color: rgba(255, 255, 255, 0.6);
+      transition: $transition-smooth;
+    }
+  }
+
+  .form-input {
+    width: 100%;
+    height: 56px;
+    padding: 0 16px 0 48px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    color: white;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: $transition-smooth;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $anime-green;
+      background: rgba(255, 255, 255, 0.12);
+      @include glow-effect($anime-green, 0.3);
+      
+      ~ .input-icon .icon {
+        color: $anime-green;
+      }
+    }
+
+    &.error {
+      border-color: $anime-red;
+      @include glow-effect($anime-red, 0.3);
+    }
+
+    &.password-input {
+      padding-right: 48px;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transition: $transition-smooth;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  .error-message {
+    margin-top: 8px;
+    color: $anime-red;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba($anime-red, 0.5);
+  }
+}
+
+.submit-button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, $anime-green, $anime-cyan);
+  border: none;
+  border-radius: 16px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: $transition-bounce;
+  position: relative;
+  overflow: hidden;
+
+ 
+
+  .button-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+    @include glow-effect($anime-green, 0.6);
+    
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  &.loading {
+    pointer-events: none;
+  }
+}
+
+.login-link {
+  margin-top: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+
+  .login-button {
+    margin-left: 20px;
+    background: none;
+    border: none;
+    color: $anime-cyan;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: $transition-smooth;
+
+    &:hover {
+      color: $anime-green;
+      text-shadow: 0 0 10px rgba($anime-green, 0.5);
+      transform: scale(1.05);
+    }
+  }
+}
+
+.home-link {
+  text-align: center;
+
+  .home-button {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin: 0 auto;
+    padding: 8px 16px;
+    border-radius: 12px;
+    transition: $transition-smooth;
+
+    .home-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateX(-4px);
+    }
+  }
+}
+
+// Animations
+@keyframes titleGlow {
+  0% {
+    text-shadow: 0 0 20px rgba($anime-green, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 30px rgba($anime-cyan, 0.8),
+                 0 0 40px rgba($anime-purple, 0.6);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  .register-card {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .register-header .register-title {
+    font-size: 2rem;
+  }
+  
+  .form-input {
+    padding: 14px 14px 14px 44px;
+  }
+  
+  .submit-button {
+    padding: 14px;
+    font-size: 1rem;
+  }
+}
