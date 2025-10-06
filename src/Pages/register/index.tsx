@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import UserService from '../../services/userService';
-import './Register.scss';
+import './register.scss';
 import { useNavigate } from 'react-router-dom';
 
 interface FormData {
